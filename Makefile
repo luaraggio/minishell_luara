@@ -1,16 +1,28 @@
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g -lreadline
 
-SRCS = 
+SRCS = main.c \
+
+OBJS = ${SRCS:.c=.o}
+
+LIBFT = libft/libft.a
 
 all: $(NAME)
 
-$(NAME):	$(SRCS)
-		$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
+$(LIBFT):
+			make -s -C libft
+
+$(NAME):	$(LIBFT) $(SRCS)
+		$(CC) $(CFLAGS) $(LIBFT) $(SRCS) -o $(NAME)
 		@echo "✅ Minishell is ready!"
 
 clean:
-	rm -f $(NAME)
+	make clean -C libft
+	rm -rf $(OBJS)
 
-re: clean all
+fclean: clean
+	make fclean -C libft
+	rm -rf $(NAME)
+
+re: fclean all

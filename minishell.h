@@ -1,30 +1,38 @@
-#ifndef define MINISHELL_H
+#ifndef MINISHELL_H
 # define MINISHELL_H
+
+# include "libft/includes/libft.h"
+# include <stdlib.h>
+# include <signal.h>
+
+//Readline library
 # include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
-# define MAX_SIZE_TOKEN 100
-# define TOKEN_SIZE 64
-
-typedef     struct s_node
+typedef struct  s_node
 {
-    char    *content;
-    char    *symbol;
-    void    *next;
+    char    **str; //input que será splitado (ainda vamos organizar como iremos separar os comandos)
+    struct  s_node    *next; //ponteiro para a próxima lista para separar os comandos de acordo com '|'(será quando precisaremos usar fork para criar outro processo)
 }       t_node;
-
-typedef     struct s_token
-{
-    char    token_type;
-    char    token_value[MAX_SIZE_TOKEN];
-
-}       t_token;
 
 enum    e_token
 {
     CMD,
+    ARG,
     PIPE,
     HEREDOC,
 };
 
+enum    e_builtins
+{
+    ECHO,
+    CD,
+    PWD,
+    EXPORT,
+    UNSET,
+    ENV,
+    EXIT,
+};
 
 #endif
