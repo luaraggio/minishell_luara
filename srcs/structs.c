@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dherszen <dherszen@student.42.rio>         +#+  +:+       +#+        */
+/*   By: lraggio <lraggio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/21 21:44:55 by dherszen          #+#    #+#             */
-/*   Updated: 2024/06/24 18:07:41 by dherszen         ###   ########.fr       */
+/*   Created: 2024/07/01 19:36:27 by lraggio           #+#    #+#             */
+/*   Updated: 2024/07/01 19:38:55 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strcmp(char *s1, char *s2)
-{
-	int	i;
+#include "minishell.h"
 
-	i = 0;
-	while (s1[i] || s2[i])
-	{
-		if (s1[i] == s2[i])
-			i++;
-		else
-			return (s1[i] - s2[i]);
-	}
-	return (0);
+/*
+t_minishell    init_structs()
+{
+
 }
+*/
+
+/*
+void    clean_struct()
+{
+    libft function: ft_lstclear(t_list **lst, void (*del)(void*));
+}
+*/
