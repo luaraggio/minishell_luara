@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dherszen <dherszen@student.42.rio>         +#+  +:+       +#+        */
+/*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 21:06:27 by dherszen          #+#    #+#             */
-/*   Updated: 2024/06/25 18:40:55 by dherszen         ###   ########.fr       */
+/*   Updated: 2024/07/02 18:53:36 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//volatile unsigned int	g_prompt_status;
+/*volatile unsigned int	g_status;*/
 
 void	signal_handle(int sig)
 {
@@ -27,16 +27,12 @@ void	signal_handle(int sig)
 		return ;
 }
 
-int	main()
+int	main(void)//int argc, char **argv, char **envp)
 {
-	t_minishell	*ms;
+	//t_minishell	*ms;
 	char	*input;
-	/*if (argc != 1)
-	{
-		exit(EXIT_FAILURE);
-	}*/
-	//ft_memset(&ms, 0, sizeof(t_minishell));
-	//ms = NULL;
+	//inicializar structs e char **envp (o nosso env);
+	//ft_memset();
 	setup_signal_handling();
 	while (42)
 	{
@@ -46,12 +42,13 @@ int	main()
 		add_history(input);
 		if (ft_strcmp(input, "exit") == 0)
 			break ;
-		parse_command(input);
-		execute_command(ms);
+		//tokens();
+		//if (!check_grammar())
+		/*execute_command(ms);*/
 		free(input);
 	}
 	clear_history();
-	free(ms);
+	//free(ms);
 	free(input);
 	return (EXIT_SUCCESS);
 }
@@ -60,7 +57,7 @@ void	setup_signal_handling(void)
 {
 	struct sigaction	sa;
 
-	ft_memset(&sa, 0, sizeof(sa));//
+	//ft_memset(&sa, 0, sizeof(sa));
 	sa.sa_handler = signal_handle;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_RESTART;

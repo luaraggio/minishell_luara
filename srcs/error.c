@@ -1,27 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executer.c                                         :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lraggio <lraggio@student.42.rio>           +#+  +:+       +#+        */
+/*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/01 19:36:27 by lraggio           #+#    #+#             */
-/*   Updated: 2024/07/01 19:38:55 by lraggio          ###   ########.fr       */
+/*   Created: 2024/07/02 18:46:38 by lraggio           #+#    #+#             */
+/*   Updated: 2024/07/02 18:47:18 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-/*
-t_minishell    init_structs()
+char    *message_error()
 {
-
+    
 }
-*/
-
-/*
-void    clean_struct()
-{
-    libft function: ft_lstclear(t_list **lst, void (*del)(void*));
-}
-*/

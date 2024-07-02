@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dherszen <dherszen@student.42.rio>         +#+  +:+       +#+        */
+/*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:58:53 by dherszen          #+#    #+#             */
-/*   Updated: 2024/06/23 18:04:14 by dherszen         ###   ########.fr       */
+/*   Updated: 2024/07/02 19:02:18 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,16 @@
 
 typedef struct s_token
 {
-	char	**str; //input que será splitado (ainda vamos organizar como iremos separar os comandos)
-	struct s_node	*next; //ponteiro para a próxima lista para separar os comandos de acordo com '|'(será quando precisaremos usar fork para criar outro processo)
+	enum e_token	type;
+	char	*token;
+	struct s_node	*next;
 }	t_token;
 
 typedef struct s_minishell
 {
-	char	*input;
-	char	**args;
-	char	**envp;
+	char			*input;
+	char			**args;
+	//char			**envp;
 	struct s_node	*token;
 }	t_minishell;
 
@@ -44,6 +45,10 @@ enum	e_token
 	ARG,
 	PIPE,
 	HEREDOC,
+	I_RED,
+	O_RED,
+	I_RED_HD, //heredoc redirection
+	I_RED_APP, //append redirection
 };
 
 enum	e_builtins
@@ -57,10 +62,12 @@ enum	e_builtins
 	EXIT,
 };
 
-int	execute_command(t_minishell *ms);
-char    *find_command_path(const char *command);
+enum	e_errors
+{
+	GRAMMAR_ERROR = -1,	
+};
+
 void	setup_signal_handling(void);
 void	signal_handle(int sig);
 void	handle_sig_error(int sig);
-struct s_minishell *parse_command(char *input);
 #endif

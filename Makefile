@@ -12,9 +12,7 @@ H_SRCS          = ./includes
 SRCS_PATH       = ./srcs
 OBJS_PATH       = ./objs
 C_SRCS 			= main.c \
-				  executer.c \
-				  parser.c \
-				  structs.c
+				  grammar.c
 
 C_OBJS		   = ${addprefix ${OBJS_PATH}/, ${C_SRCS:.c=.o}}
 
