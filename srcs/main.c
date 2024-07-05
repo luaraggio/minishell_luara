@@ -11,29 +11,21 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+/*
 
-/*volatile unsigned int	g_status;*/
+volatile unsigned int	g_status; a global variable to Handle $? -> which should 
+expand to the exit status of the most recently executed foreground pipeline.
 
-void	signal_handle(int sig)
-{
-	if (sig == SIGINT)
-	{
-		printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-	else if (sig == SIGQUIT)
-		return ;
-}
-
+*/
 int	main(void)//int argc, char **argv, char **envp)
 {
-	//t_minishell	*ms;
+	int	i;
 	char	*input;
-	//inicializar structs e char **envp (o nosso env);
-	//ft_memset();
+	char	**sentences;
+
+	i = 0;
 	setup_signal_handling();
+	printf("Antes do loop\n");
 	while (42)
 	{
 		input = readline("$ ");
@@ -42,44 +34,21 @@ int	main(void)//int argc, char **argv, char **envp)
 		add_history(input);
 		if (ft_strcmp(input, "exit") == 0)
 			break ;
-		//tokens();
-		//if (!check_grammar())
-		/*execute_command(ms);*/
+		/*if (ft_parser(input) != 0)
+			continue;*/
+		//printf("Input depois de substituir o pipe: %s\n", );
+		sentences = split_sentences(input);
+		i = 0;
+		while (sentences[i])
+		{
+			printf("Sentença[%d]: %s\n", i, sentences[i]);
+			i++;
+		}
 		free(input);
 	}
+	printf("Depois do loop\n");
 	clear_history();
-	//free(ms);
-	free(input);
-	return (EXIT_SUCCESS);
-}
-
-void	setup_signal_handling(void)
-{
-	struct sigaction	sa;
-
-	//ft_memset(&sa, 0, sizeof(sa));
-	sa.sa_handler = signal_handle;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = SA_RESTART;
-	if (sigaction(SIGINT, &sa, NULL) == -1)
-		handle_sig_error(SIGINT);
-	sa.sa_handler = SIG_IGN;
-	if (sigaction(SIGQUIT, &sa, NULL) == -1)
-		handle_sig_error(SIGQUIT);
-}
-
-void	handle_sig_error(int sig)
-{
-	if (sig == SIGINT)
-	{
-		perror(("Error setting up SIGINT handler\n"));
-		exit(EXIT_FAILURE);
-	}
-	else if (sig == SIGQUIT)
-	{
-		perror(("Error setting up SIGQUIT handler\n"));
-		exit(EXIT_FAILURE);
-	}
-	else
-		return ;
+	//dar free na matriz de struct s_sentence!!!
+	//free(input);
+	//return (EXIT_SUCCESS);
 }

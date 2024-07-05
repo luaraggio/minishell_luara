@@ -12,11 +12,6 @@
 
 #include "minishell.h"
 
-int is_space_or_tab(int c)
-{
-    return (c == ' ' || c == '\t');
-}
-
 /*int    check_grammar(char *input)
 {
     int     i;
